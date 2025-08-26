@@ -197,8 +197,8 @@
 						<td>
 							<select name="svc1" id="nfnd_tipo_1">
 								<option value="none" selected disabled>-- Selecione --</option>
-								<option value="Serviço">Serviço</option>
-								<option value="Débito">Débito</option>
+								<option value="Serviço">SERVIÇO</option>
+								<option value="Débito">DÉBITO</option>
 							</select>
 						</td>
 						<td><input id="nfnd_nome_1" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
@@ -209,8 +209,8 @@
 						<td>
 							<select name="svc1" id="nfnd_tipo_2">
 								<option value="none" selected disabled>-- Selecione --</option>
-								<option value="Serviço">Serviço</option>
-								<option value="Débito">Débito</option>
+								<option value="Serviço">SERVIÇO</option>
+								<option value="Débito">DÉBITO</option>
 							</select>
 						</td>
 						<td><input id="nfnd_nome_2" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
@@ -285,7 +285,7 @@
 		var nfnd_linha_2 = document.getElementById("nfnd_tipo_2").value+"  |  "+document.getElementById("nfnd_nome_2").value+"  |  "+document.getElementById("nfnd_tt_2").value+"  |  "+document.getElementById("nfnd_cod_2").value;
 		var nfnd_body = nfnd_head+linha_break+nfnd_linha_1+linha_break+nfnd_linha_2;
 
-		var danfe_head = "NCM    |    NOME    |    QTD.    |    UNI.    |    VALOR    ||    ICMS    ||    IPI";
+		var danfe_head = "NCM    |    NOME    |    QTD.    |    UNI.    |    VALOR    |    ICMS    |    IPI";
 		var danfe_linha_1 = document.getElementById("danfe_ncm_1").value+"  |  "+document.getElementById("danfe_nome_1").value+"  |  "+document.getElementById("danfe_qtd_1").value+"  |  "+document.getElementById("danfe_uni_1").value+"  |  "+document.getElementById("danfe_tt_1").value+"  |  "+document.getElementById("danfe_icms_1").value+"%  |  "+document.getElementById("danfe_ipi_1").value+"%";
 		var danfe_linha_2 = document.getElementById("danfe_ncm_2").value+"  |  "+document.getElementById("danfe_nome_2").value+"  |  "+document.getElementById("danfe_qtd_2").value+"  |  "+document.getElementById("danfe_uni_2").value+"  |  "+document.getElementById("danfe_tt_2").value+"  |  "+document.getElementById("danfe_icms_2").value+"%  |  "+document.getElementById("danfe_ipi_2").value+"%";
 		var danfe_body = linha_break+danfe_head+linha_break+danfe_linha_1+linha_break+danfe_linha_2;
@@ -298,18 +298,21 @@
 	   	
 		// ENVIO DO EMAIL
 		if (rec == "none" || forn == "none" || peps == "none") {		// CHECK INICIAL - PREENCHIMENTO FILTROS INICIAIS
-			alert("Por favor, preencha as informações necessárias");
-		}
-		if (rec == "NF/ND") {
-			for (let i = 1; i <=5; i++) {
-				if (document.getElementById("nfnd_tipo_"+i).value == "none") {
+			alert("Por favor, preencha as informações necessárias de FORNECEDOR, PAGAMENTO ou RECEBIMENTO");
+		} else if (rec == "NF/ND") {
+			for (let i = 1; i <= 2; i++) {
+				var tipo = document.getElementById("nfnd_tipo_"+i).value;
+				var nome = document.getElementById("nfnd_nome_"+i).value;
+				if (tipo == "none" && nome != "none" || tipo == "none" && nome == "none" || tipo != "none" && nome == "none") {
+					// return;
 					alert("Por favor, defina se o item "+i+" é um SERVIÇO ou um PRODUTO");
 				} else {
 			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
 	    		}
 			}
-		}
-		
+		} else if (rec == "DANFE") {
+			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
+	    }
 	}
 
 	function formulario(){

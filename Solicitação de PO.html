@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Solicitação de PO</title>
+
+	<style>
+		body {
+			width: 98.5vw;
+			height: 98vh;
+			justify-self: center;
+		}
+
+		.cabecalho {
+			display: flex;
+			white-space: nowrap;
+		}
+
+		.cabecalho p {
+			font-family: "Courier New";
+			font-size: 4.5em;
+			margin-top: 4%;
+			margin-bottom: 2.3%;
+			width: 100%;
+			color: black;
+		}
+
+		.filtros {
+			justify-self: center;
+			width: 95%;
+			justify-content: space-evenly;
+			padding-bottom: 1.5%;
+		}
+		
+		.filtros tr {
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.filtros td select, p{
+			width: 20vw;
+			text-align: center;
+			appearance: none;
+		}
+
+		.filtros p {
+			font-family: Arial, Helvetica, sans-serif;
+			color: black;
+		}
+		
+		.enviar {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			width: 100%;
+			max-height: 10em;
+		}
+		
+		.enviar button {
+			background-color: #d3d3d3;
+			margin: 2.5em;
+			width: 20%;
+			height: 3em;
+			text-align: center;
+			text-decoration: none;
+			font-family: Arial, Helvetica, sans-serif;
+			color: #333333;
+			border-radius: 18px;
+			font-size: 20px;
+			cursor: pointer;
+		}
+		
+		.enviar button:hover {
+			background-color: #bababa;
+			color: black;
+			border-radius: 15px;
+		}
+
+		.formularios {
+			display: flex;
+			justify-content: center;
+			width: 95%;
+			justify-self: center;
+			flex-direction: column;
+			margin-top: 3%;
+		}
+
+		.nfnd, .danfe {
+			width: 100%;
+			min-height: 10vh;
+			text-align: center;
+			align-content: center;
+			display: none;
+			justify-content: space-evenly;
+			justify-self: center;
+		}
+
+		.formnf, .formdanfe {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.formnf input, .formnf select, .formdanfe input, .formdanfe select {
+			width: 85%;
+			text-align: center;
+			appearance: none;
+			margin-bottom: 1em;
+		}
+		.formnf input::-webkit-outer-spin-button, .formnf input::-webkit-inner-spin-button, .formdanfe input::-webkit-outer-spin-button, .formdanfe input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+
+		.formdanfe td p {
+			width: 12.5vw;
+		}
+
+		input, select {
+			border: none;
+			border-bottom: 2px solid gray;
+			/* border-left: 2px solid gray; */
+			border-bottom-left-radius: 15%;
+			border-bottom-right-radius: 15%;
+			/* background-image: linear-gradient(to right, rgba(128, 128, 128, 0.075), rgb(255, 255, 255)); */
+		}
+		
+	</style>
+	
+</head>
+
+<body>
+	<header>
+		<div class="cabecalho">
+			<p><strong>SOLICITAÇÃO DE PO</strong></p>
+		</div>	
+	</header>
+
+	<main>
+
+		<table class="filtros"> <!--FILTROS-->
+			<tr>
+				<td><p><strong>FORNECEDOR</strong></p></td>
+				<td><p><strong>PAGAMENTO</strong></p></td>
+				<td><p><strong>TIPO DE RECEBIMENTO</strong></p></td>
+			</tr>
+			<tr>
+				<td>
+					<select name="fornecedores" id="fornecedores">
+						<option value="none" selected disabled>-- Selecione --</option>
+						<option value="AZ4">AZ4</option>
+						<option value="BCD TRAVEL">BCD TRAVEL</option>
+						<option value="BRANDWORKS">BRANDWORKS</option>
+						<option value="BRAVIUM">BRAVIUM</option>
+						<option value="CWT">CWT</option>
+						<option value="FOUR LIVE">FOUR LIVE</option>
+						<option value="HH PRINT">HH PRINT</option>
+						<option value="INCENTIVALE">INCENTIVALE</option>
+						<option value="MUNDIAL">MUNDIAL</option>
+						<option value="PLUG">PLUG</option>
+					</select>
+				</td>
+				<td>
+					<select name="peps" id="peps">
+						<option value="none" selected disabled>-- Selecione --</option>
+						<option id="1758565200 - OVH">RENATA --- 1758565200</option>
+						<option id="J-175825BR04BR/DE/VD/GR">FLAVIA --- J-175825BR04BR/DE/VD/GR</option>
+						<option id="K-175825BR04BR/VS/GT/PV">FLAVIA --- K-175825BR04BR/VS/GT/PV</option>
+						<option id="K-175825BR04BR/VS/GT/AG">FLAVIA --- K-175825BR04BR/VS/GT/AG</option>
+						<option id="K-175825BR04RS/TE/GT/TC">SÂMEA --- K-175825BR04RS/TE/GT/TC</option>
+						<option id="K-175825BR04BR/TE/GT/VA">SÂMEA --- K-175825BR04BR/TE/GT/VA</option>
+						<option id="K-175825BR04BR/TE/GT/ID">SÂMEA --- K-175825BR04BR/TE/GT/ID</option>
+					</select>
+				</td>
+				<td>
+					<select name="recebimento" id="recebimento">
+						<option value="none" selected disabled>-- Selecione --</option>
+						<option value="NF/ND">SERVIÇO E DÉBITO</option>
+						<option value="DANFE">PRODUTO</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+
+		<section class="formularios">
+
+			<div class="nfnd" id="mod1">
+				<table class="formnf">
+					<tr> <!--CABEÇALHO-->
+						<td><p>TIPO DE SERVIÇO</p></td>
+						<td><p>NOME DO ITEM</p></td>
+						<td><p>VALOR</p></td>
+						<td><p>CÓDIGO DE SERVIÇO</p></td>
+					</tr>
+					<tr> <!--LINHA 1-->
+						<td>
+							<select name="svc1" id="nfnd_tipo_1">
+								<option value="none" selected disabled>-- Selecione --</option>
+								<option value="Serviço">Serviço</option>
+								<option value="Débito">Débito</option>
+							</select>
+						</td>
+						<td><input id="nfnd_nome_1" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
+						<td><input id="nfnd_tt_1" type="number" placeholder="Ex.: 6.500"></td>
+						<td><input id="nfnd_cod_1" type="text" placeholder="Ex.: 02496"></td>
+					</tr>
+					<tr> <!--LINHA 2-->
+						<td>
+							<select name="svc1" id="nfnd_tipo_2">
+								<option value="none" selected disabled>-- Selecione --</option>
+								<option value="Serviço">Serviço</option>
+								<option value="Débito">Débito</option>
+							</select>
+						</td>
+						<td><input id="nfnd_nome_2" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
+						<td><input id="nfnd_tt_2" type="number" placeholder="Ex.: 6.500"></td>
+						<td><input id="nfnd_cod_2" type="text" placeholder="Ex.: 02496"></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="danfe" id="mod2">
+				<table class="formdanfe">
+					<tr> <!--CABEÇALHO-->
+						<td><p>NCM</p></td>
+						<td><p>NOME DO ITEM</p></td>
+						<td><p>QTD.</p></td>
+						<td><p>VALOR UNITÁRIO</p></td>
+						<td><p>VALOR TOTAL</p></td>
+						<td><p>% ICMS</p></td>
+						<td><p>% IPI</p></td>
+					</tr>
+					<tr> <!--LINHA 1-->
+						<td><input type="text" id="danfe_ncm_1" placeholder="Ex.: 0000.00.00"></td>
+						<td><input type="text" id="danfe_nome_1" placeholder="Ex.: GARRAFA"></td>
+						<td><input type="number" id="danfe_qtd_1" placeholder="Ex.: 120"></td>
+						<td><input type="number" id="danfe_uni_1" placeholder="Ex.: 1,50"></td>
+						<td><input type="number" id="danfe_tt_1" readonly></td>
+						<td><input type="number" id="danfe_icms_1" placeholder="Ex.: 18" value="0"></td>
+						<td><input type="number" id="danfe_ipi_1" placeholder="Ex.: 13" value="0"></td>
+					</tr>
+					<tr> <!--LINHA 2-->
+						<td><input type="text" id="danfe_ncm_2" placeholder="Ex.: 0000.00.00"></td>
+						<td><input type="text" id="danfe_nome_2" placeholder="Ex.: GARRAFA"></td>
+						<td><input type="number" id="danfe_qtd_2" placeholder="Ex.: 120"></td>
+						<td><input type="number" id="danfe_uni_2" placeholder="Ex.: 1,50"></td>
+						<td><input type="number" id="danfe_tt_2" readonly></td>
+						<td><input type="number" id="danfe_icms_2" placeholder="Ex.: 18" value="0"></td>
+						<td><input type="number" id="danfe_ipi_2" placeholder="Ex.: 13" value="0"></td>
+					</tr>				
+				</table>
+			</div>
+
+		</section>
+
+		<div class="enviar"> <!--BOTÃO ENVIAR-->
+			<button onclick="abrir()"><strong>ENVIAR</strong></button>
+		</div>
+
+	</main>
+
+
+
+<script>	
+	document.getElementById("recebimento").addEventListener("click", formulario);
+
+	document.getElementById("danfe_uni_1").addEventListener("change", danfe1);
+	document.getElementById("danfe_qtd_1").addEventListener("change", danfe1);
+
+    function abrir(){
+		// VARS GERAIS
+		var rec = document.getElementById("recebimento").value;
+		var forn = document.getElementById("fornecedores").value;
+		var peps = document.getElementById("peps").value;
+
+		// VARS PARA EMAIL
+		var sub = "Requisição de PO: "+rec+" --- "+forn;
+
+		var linha_break = "%0D%0A____________________________________________________________________________________________________________________________%0D%0A"
+		
+		var nfnd_head = "TIPO    |    NOME    |    VALOR    |    CÓDIGO";
+		var nfnd_linha_1 = document.getElementById("nfnd_tipo_1").value+"  |  "+document.getElementById("nfnd_nome_1").value+"  |  "+document.getElementById("nfnd_tt_1").value+"  |  "+document.getElementById("nfnd_cod_1").value;
+		var nfnd_linha_2 = document.getElementById("nfnd_tipo_2").value+"  |  "+document.getElementById("nfnd_nome_2").value+"  |  "+document.getElementById("nfnd_tt_2").value+"  |  "+document.getElementById("nfnd_cod_2").value;
+		var nfnd_body = nfnd_head+linha_break+nfnd_linha_1+linha_break+nfnd_linha_2;
+
+		var danfe_head = "NCM    |    NOME    |    QTD.    |    UNI.    |    VALOR    ||    ICMS    ||    IPI";
+		var danfe_linha_1 = document.getElementById("danfe_ncm_1").value+"  |  "+document.getElementById("danfe_nome_1").value+"  |  "+document.getElementById("danfe_qtd_1").value+"  |  "+document.getElementById("danfe_uni_1").value+"  |  "+document.getElementById("danfe_tt_1").value+"  |  "+document.getElementById("danfe_icms_1").value+"%  |  "+document.getElementById("danfe_ipi_1").value+"%";
+		var danfe_linha_2 = document.getElementById("danfe_ncm_2").value+"  |  "+document.getElementById("danfe_nome_2").value+"  |  "+document.getElementById("danfe_qtd_2").value+"  |  "+document.getElementById("danfe_uni_2").value+"  |  "+document.getElementById("danfe_tt_2").value+"  |  "+document.getElementById("danfe_icms_2").value+"%  |  "+document.getElementById("danfe_ipi_2").value+"%";
+		var danfe_body = linha_break+danfe_head+linha_break+danfe_linha_1+linha_break+danfe_linha_2;
+
+		if (rec == "NF/ND") {
+			var body = "REQUISIÇÃO DE PO%0D%0A%0D%0AFORNECEDOR: "+forn+"%0D%0APEP: "+peps+"%0D%0A%0D%0A"+nfnd_body;
+		} else {
+			var body = "REQUISIÇÃO DE PO%0D%0A%0D%0AFORNECEDOR: "+forn+"%0D%0APEP: "+peps+"%0D%0A%0D%0A"+danfe_body;
+		}
+	   	
+		var email = window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
+
+		// ENVIO DO EMAIL
+		if (rec == "none" || forn == "none" || peps == "none") {		// CHECK INICIAL - PREENCHIMENTO FILTROS INICIAIS
+			alert("Por favor, preencha as informações necessárias");
+		} else if (rec == "NF/ND") {
+			for (let i = 1; i <=5; i++) {
+				if (document.getElementById("nfnd_tipo_"+i).value == "none") {
+					alert("Por favor, defina se o item "+i+" é um SERVIÇO ou um PRODUTO");
+					break;
+				} else {
+			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
+	    }
+			}
+		} else {
+			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
+		}
+	}
+
+	function formulario(){
+		var rec = document.getElementById("recebimento").value;
+
+		if (rec == "NF/ND") {
+			document.getElementById("mod1").style.display = "flex";
+			document.getElementById("mod2").style.display = "none";
+		} else if (rec == "DANFE") {
+			document.getElementById("mod1").style.display = "none";
+			document.getElementById("mod2").style.display = "flex";
+		} else {
+			document.getElementById("mod1").style.display = "none";
+			document.getElementById("mod2").style.display = "none";
+		}
+	}
+
+	function danfe1(){
+		var qtd = document.getElementById("danfe_qtd_1").value;
+		var uni = document.getElementById("danfe_uni_1").value;
+		var multi = (qtd*uni);
+		document.getElementById("danfe_tt_1").value = multi.toFixed(2);
+	}
+
+
+</script>
+
+</body>
+</html>

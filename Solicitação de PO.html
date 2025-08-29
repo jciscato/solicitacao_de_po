@@ -24,6 +24,7 @@
 			margin-bottom: 2.3%;
 			width: 100%;
 			color: black;
+			text-align: center;
 		}
 
 		.filtros {
@@ -36,16 +37,17 @@
 		.filtros tr {
 			width: 100%;
 			display: flex;
-			justify-content: space-around;
+			justify-content: space-between;
 		}
 
-		.filtros td select, p{
+		.filtros td select, .filtros td input, .filtros td p{
 			width: 20vw;
 			text-align: center;
 			appearance: none;
 		}
 
 		.filtros p {
+			text-align: center;
 			font-family: Arial, Helvetica, sans-serif;
 			color: black;
 		}
@@ -109,7 +111,7 @@
 			appearance: none;
 			margin-bottom: 1em;
 		}
-		.formnf input::-webkit-outer-spin-button, .formnf input::-webkit-inner-spin-button, .formdanfe input::-webkit-outer-spin-button, .formdanfe input::-webkit-inner-spin-button {
+		.formnf input::-webkit-outer-spin-button, .formnf input::-webkit-inner-spin-button, .formdanfe input::-webkit-outer-spin-button, .formdanfe input::-webkit-inner-spin-button, .vendor_extra_cod input::-webkit-outer-spin-button, .vendor_extra_cod input::-webkit-inner-spin-button {
 			-webkit-appearance: none;
 		}
 
@@ -120,10 +122,16 @@
 		input, select {
 			border: none;
 			border-bottom: 2px solid gray;
-			/* border-left: 2px solid gray; */
 			border-bottom-left-radius: 15%;
 			border-bottom-right-radius: 15%;
-			/* background-image: linear-gradient(to right, rgba(128, 128, 128, 0.075), rgb(255, 255, 255)); */
+		}
+		
+		.vendor_extra_nome_titulo, .vendor_extra_nome, .vendor_extra_cod_titulo, .vendor_extra_cod {
+			display: none;
+		}
+
+		.vendor_extra_nome_titulo strong, .vendor_extra_cod_titulo strong {
+			color: red;
 		}
 		
 	</style>
@@ -142,13 +150,16 @@
 		<table class="filtros"> <!--FILTROS-->
 			<tr>
 				<td><p><strong>FORNECEDOR</strong></p></td>
+				<td class="vendor_extra_nome_titulo" id="vendor_extra_nome_titulo"><p><strong>VENDOR EXTRA</strong></p></td>
+				<td class="vendor_extra_cod_titulo" id="vendor_extra_cod_titulo"><p><strong>CÓD. VENDOR EXTRA</strong></p></td>
 				<td><p><strong>PAGAMENTO</strong></p></td>
 				<td><p><strong>TIPO DE RECEBIMENTO</strong></p></td>
 			</tr>
 			<tr>
 				<td>
-					<select name="fornecedores" id="fornecedores">
+					<select name="fornecedores" id="fornecedores" onclick="fornecedorextra()">
 						<option value="none" selected disabled>-- Selecione --</option>
+						<!-- <option value="OTHER">-- VENDOR FORA DA LISTA --</option> -->
 						<option value="AZ4">AZ4</option>
 						<option value="BCD TRAVEL">BCD TRAVEL</option>
 						<option value="BRANDWORKS">BRANDWORKS</option>
@@ -159,7 +170,15 @@
 						<option value="INCENTIVALE">INCENTIVALE</option>
 						<option value="MUNDIAL">MUNDIAL</option>
 						<option value="PLUG">PLUG</option>
+						<option value="VIDI">VIDI</option>
+						<option value="VINDI">VINDI</option>
 					</select>
+				</td>
+				<td class="vendor_extra_nome" id="vendor_extra_nome">
+					<input type="text">
+				</td>
+				<td class="vendor_extra_cod" id="vendor_extra_cod">
+					<input type="number">
 				</td>
 				<td>
 					<select name="peps" id="peps">
@@ -195,27 +214,63 @@
 					</tr>
 					<tr> <!--LINHA 1-->
 						<td>
-							<select name="svc1" id="nfnd_tipo_1">
+							<select name="nfnd_tipo_1" id="nfnd_tipo_1">
 								<option value="none" selected disabled>-- Selecione --</option>
 								<option value="Serviço">SERVIÇO</option>
 								<option value="Débito">DÉBITO</option>
 							</select>
 						</td>
-						<td><input id="nfnd_nome_1" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
-						<td><input id="nfnd_tt_1" type="number" placeholder="Ex.: 6.500"></td>
-						<td><input id="nfnd_cod_1" type="text" placeholder="Ex.: 02496"></td>
+						<td><input id="nfnd_nome_1" type="text"></td>
+						<td><input id="nfnd_tt_1" type="number"></td>
+						<td><input id="nfnd_cod_1" type="text"></td>
 					</tr>
 					<tr> <!--LINHA 2-->
 						<td>
-							<select name="svc1" id="nfnd_tipo_2">
+							<select name="nfnd_tipo_2" id="nfnd_tipo_2">
 								<option value="none" selected disabled>-- Selecione --</option>
 								<option value="Serviço">SERVIÇO</option>
 								<option value="Débito">DÉBITO</option>
 							</select>
 						</td>
-						<td><input id="nfnd_nome_2" type="text" placeholder="Ex.: TV - FEE BRAVIUM"></td>
-						<td><input id="nfnd_tt_2" type="number" placeholder="Ex.: 6.500"></td>
-						<td><input id="nfnd_cod_2" type="text" placeholder="Ex.: 02496"></td>
+						<td><input id="nfnd_nome_2" type="text"></td>
+						<td><input id="nfnd_tt_2" type="number"></td>
+						<td><input id="nfnd_cod_2" type="text"></td>
+					</tr>
+					<tr> <!--LINHA 3-->
+						<td>
+							<select name="nfnd_tipo_3" id="nfnd_tipo_3">
+								<option value="none" selected disabled>-- Selecione --</option>
+								<option value="Serviço">SERVIÇO</option>
+								<option value="Débito">DÉBITO</option>
+							</select>
+						</td>
+						<td><input id="nfnd_nome_3" type="text"></td>
+						<td><input id="nfnd_tt_3" type="number"></td>
+						<td><input id="nfnd_cod_3" type="text"></td>
+					</tr>
+					<tr> <!--LINHA 4-->
+						<td>
+							<select name="nfnd_tipo_4" id="nfnd_tipo_4">
+								<option value="none" selected disabled>-- Selecione --</option>
+								<option value="Serviço">SERVIÇO</option>
+								<option value="Débito">DÉBITO</option>
+							</select>
+						</td>
+						<td><input id="nfnd_nome_4" type="text"></td>
+						<td><input id="nfnd_tt_4" type="number"></td>
+						<td><input id="nfnd_cod_4" type="text"></td>
+					</tr>
+					<tr> <!--LINHA 5-->
+						<td>
+							<select name="nfnd_tipo_5" id="nfnd_tipo_5">
+								<option value="none" selected disabled>-- Selecione --</option>
+								<option value="Serviço">SERVIÇO</option>
+								<option value="Débito">DÉBITO</option>
+							</select>
+						</td>
+						<td><input id="nfnd_nome_5" type="text"></td>
+						<td><input id="nfnd_tt_5" type="number"></td>
+						<td><input id="nfnd_cod_5" type="text"></td>
 					</tr>
 				</table>
 
@@ -233,22 +288,49 @@
 						<td><p>% IPI</p></td>
 					</tr>
 					<tr> <!--LINHA 1-->
-						<td><input type="text" id="danfe_ncm_1" placeholder="Ex.: 0000.00.00"></td>
-						<td><input type="text" id="danfe_nome_1" placeholder="Ex.: GARRAFA"></td>
-						<td><input type="number" id="danfe_qtd_1" placeholder="Ex.: 120"></td>
-						<td><input type="number" id="danfe_uni_1" placeholder="Ex.: 1,50"></td>
-						<td><input type="number" id="danfe_tt_1" readonly></td>
-						<td><input type="number" id="danfe_icms_1" placeholder="Ex.: 18"></td>
-						<td><input type="number" id="danfe_ipi_1" placeholder="Ex.: 13"></td>
+						<td><input type="text" id="danfe_ncm_1"></td>
+						<td><input type="text" id="danfe_nome_1"></td>
+						<td><input type="number" id="danfe_qtd_1"></td>
+						<td><input type="number" id="danfe_uni_1"></td>
+						<td><input type="number" id="danfe_tt_1" placeholder="Cálculo Automático" readonly></td>
+						<td><input type="number" id="danfe_icms_1"></td>
+						<td><input type="number" id="danfe_ipi_1"></td>
 					</tr>
 					<tr> <!--LINHA 2-->
-						<td><input type="text" id="danfe_ncm_2" placeholder="Ex.: 0000.00.00"></td>
-						<td><input type="text" id="danfe_nome_2" placeholder="Ex.: GARRAFA"></td>
-						<td><input type="number" id="danfe_qtd_2" placeholder="Ex.: 120"></td>
-						<td><input type="number" id="danfe_uni_2" placeholder="Ex.: 1,50"></td>
-						<td><input type="number" id="danfe_tt_2" readonly></td>
-						<td><input type="number" id="danfe_icms_2" placeholder="Ex.: 18"></td>
-						<td><input type="number" id="danfe_ipi_2" placeholder="Ex.: 13"></td>
+						<td><input type="text" id="danfe_ncm_2"></td>
+						<td><input type="text" id="danfe_nome_2"></td>
+						<td><input type="number" id="danfe_qtd_2"></td>
+						<td><input type="number" id="danfe_uni_2"></td>
+						<td><input type="number" id="danfe_tt_2" placeholder="Cálculo Automático" readonly></td>
+						<td><input type="number" id="danfe_icms_2"></td>
+						<td><input type="number" id="danfe_ipi_2"></td>
+					</tr>				
+					<tr> <!--LINHA 3-->
+						<td><input type="text" id="danfe_ncm_3"></td>
+						<td><input type="text" id="danfe_nome_3"></td>
+						<td><input type="number" id="danfe_qtd_3"></td>
+						<td><input type="number" id="danfe_uni_3"></td>
+						<td><input type="number" id="danfe_tt_3" placeholder="Cálculo Automático" readonly></td>
+						<td><input type="number" id="danfe_icms_3"></td>
+						<td><input type="number" id="danfe_ipi_3"></td>
+					</tr>				
+					<tr> <!--LINHA 4-->
+						<td><input type="text" id="danfe_ncm_4"></td>
+						<td><input type="text" id="danfe_nome_4"></td>
+						<td><input type="number" id="danfe_qtd_4"></td>
+						<td><input type="number" id="danfe_uni_4"></td>
+						<td><input type="number" id="danfe_tt_4" placeholder="Cálculo Automático" readonly></td>
+						<td><input type="number" id="danfe_icms_4"></td>
+						<td><input type="number" id="danfe_ipi_4"></td>
+					</tr>				
+					<tr> <!--LINHA 5-->
+						<td><input type="text" id="danfe_ncm_5"></td>
+						<td><input type="text" id="danfe_nome_5"></td>
+						<td><input type="number" id="danfe_qtd_5"></td>
+						<td><input type="number" id="danfe_uni_5"></td>
+						<td><input type="number" id="danfe_tt_5" placeholder="Cálculo Automático" readonly></td>
+						<td><input type="number" id="danfe_icms_5"></td>
+						<td><input type="number" id="danfe_ipi_5"></td>
 					</tr>				
 				</table>
 			</div>
@@ -268,6 +350,14 @@
 
 	document.getElementById("danfe_uni_1").addEventListener("change", danfe1);
 	document.getElementById("danfe_qtd_1").addEventListener("change", danfe1);
+	document.getElementById("danfe_uni_2").addEventListener("change", danfe2);
+	document.getElementById("danfe_qtd_2").addEventListener("change", danfe2);
+	document.getElementById("danfe_uni_3").addEventListener("change", danfe3);
+	document.getElementById("danfe_qtd_3").addEventListener("change", danfe3);
+	document.getElementById("danfe_uni_4").addEventListener("change", danfe4);
+	document.getElementById("danfe_qtd_4").addEventListener("change", danfe4);
+	document.getElementById("danfe_uni_5").addEventListener("change", danfe5);
+	document.getElementById("danfe_qtd_5").addEventListener("change", danfe5);
 
     function abrir(){
 		// VARS GERAIS
@@ -278,18 +368,50 @@
 		// VARS PARA EMAIL
 		var sub = "Requisição de PO: "+rec+" --- "+forn;
 
-		var linha_break = "%0D%0A____________________________________________________________________________________________________________________________%0D%0A"
+		var linha_break = "%0D%0A----------------------------------------------------------------------------------------------------------------------------%0D%0A";
 		
-		var nfnd_head = "TIPO    |    NOME    |    VALOR    |    CÓDIGO";
-		var nfnd_linha_1 = document.getElementById("nfnd_tipo_1").value+"  |  "+document.getElementById("nfnd_nome_1").value+"  |  "+document.getElementById("nfnd_tt_1").value+"  |  "+document.getElementById("nfnd_cod_1").value;
-		var nfnd_linha_2 = document.getElementById("nfnd_tipo_2").value+"  |  "+document.getElementById("nfnd_nome_2").value+"  |  "+document.getElementById("nfnd_tt_2").value+"  |  "+document.getElementById("nfnd_cod_2").value;
-		var nfnd_body = nfnd_head+linha_break+nfnd_linha_1+linha_break+nfnd_linha_2;
+		var nfnd_head = "TIPO      |      NOME      |      VALOR      |      CÓDIGO"+linha_break;
+		var nfnd_1 = document.getElementById("nfnd_tipo_1").value+"  |  "+document.getElementById("nfnd_nome_1").value+"  |  "+document.getElementById("nfnd_tt_1").value+"  |  "+document.getElementById("nfnd_cod_1").value+linha_break;
+		var nfnd_2 = document.getElementById("nfnd_tipo_2").value+"  |  "+document.getElementById("nfnd_nome_2").value+"  |  "+document.getElementById("nfnd_tt_2").value+"  |  "+document.getElementById("nfnd_cod_2").value+linha_break;
+		var nfnd_3 = document.getElementById("nfnd_tipo_3").value+"  |  "+document.getElementById("nfnd_nome_3").value+"  |  "+document.getElementById("nfnd_tt_3").value+"  |  "+document.getElementById("nfnd_cod_3").value+linha_break;
+		var nfnd_4 = document.getElementById("nfnd_tipo_4").value+"  |  "+document.getElementById("nfnd_nome_4").value+"  |  "+document.getElementById("nfnd_tt_4").value+"  |  "+document.getElementById("nfnd_cod_4").value+linha_break;
+		var nfnd_5 = document.getElementById("nfnd_tipo_5").value+"  |  "+document.getElementById("nfnd_nome_5").value+"  |  "+document.getElementById("nfnd_tt_5").value+"  |  "+document.getElementById("nfnd_cod_5").value+linha_break;
+		
+		var danfe_head = "NCM      |      NOME      |      QTD.      |      UNI.      |      VALOR      |      ICMS      |      IPI"+linha_break;
+		var danfe_1 = document.getElementById("danfe_ncm_1").value+"  |  "+document.getElementById("danfe_nome_1").value+"  |  "+document.getElementById("danfe_qtd_1").value+"  |  "+document.getElementById("danfe_uni_1").value+"  |  "+document.getElementById("danfe_tt_1").value+"  |  "+document.getElementById("danfe_icms_1").value+"%  |  "+document.getElementById("danfe_ipi_1").value+"%"+linha_break;
+		var danfe_2 = document.getElementById("danfe_ncm_2").value+"  |  "+document.getElementById("danfe_nome_2").value+"  |  "+document.getElementById("danfe_qtd_2").value+"  |  "+document.getElementById("danfe_uni_2").value+"  |  "+document.getElementById("danfe_tt_2").value+"  |  "+document.getElementById("danfe_icms_2").value+"%  |  "+document.getElementById("danfe_ipi_2").value+"%"+linha_break;
+		var danfe_3 = document.getElementById("danfe_ncm_3").value+"  |  "+document.getElementById("danfe_nome_3").value+"  |  "+document.getElementById("danfe_qtd_3").value+"  |  "+document.getElementById("danfe_uni_3").value+"  |  "+document.getElementById("danfe_tt_3").value+"  |  "+document.getElementById("danfe_icms_3").value+"%  |  "+document.getElementById("danfe_ipi_3").value+"%"+linha_break;
+		var danfe_4 = document.getElementById("danfe_ncm_4").value+"  |  "+document.getElementById("danfe_nome_4").value+"  |  "+document.getElementById("danfe_qtd_4").value+"  |  "+document.getElementById("danfe_uni_4").value+"  |  "+document.getElementById("danfe_tt_4").value+"  |  "+document.getElementById("danfe_icms_4").value+"%  |  "+document.getElementById("danfe_ipi_4").value+"%"+linha_break;
+		var danfe_5 = document.getElementById("danfe_ncm_5").value+"  |  "+document.getElementById("danfe_nome_5").value+"  |  "+document.getElementById("danfe_qtd_5").value+"  |  "+document.getElementById("danfe_uni_5").value+"  |  "+document.getElementById("danfe_tt_5").value+"  |  "+document.getElementById("danfe_icms_5").value+"%  |  "+document.getElementById("danfe_ipi_5").value+"%"+linha_break;
+		
 
-		var danfe_head = "NCM    |    NOME    |    QTD.    |    UNI.    |    VALOR    |    ICMS    |    IPI";
-		var danfe_linha_1 = document.getElementById("danfe_ncm_1").value+"  |  "+document.getElementById("danfe_nome_1").value+"  |  "+document.getElementById("danfe_qtd_1").value+"  |  "+document.getElementById("danfe_uni_1").value+"  |  "+document.getElementById("danfe_tt_1").value+"  |  "+document.getElementById("danfe_icms_1").value+"%  |  "+document.getElementById("danfe_ipi_1").value+"%";
-		var danfe_linha_2 = document.getElementById("danfe_ncm_2").value+"  |  "+document.getElementById("danfe_nome_2").value+"  |  "+document.getElementById("danfe_qtd_2").value+"  |  "+document.getElementById("danfe_uni_2").value+"  |  "+document.getElementById("danfe_tt_2").value+"  |  "+document.getElementById("danfe_icms_2").value+"%  |  "+document.getElementById("danfe_ipi_2").value+"%";
-		var danfe_body = linha_break+danfe_head+linha_break+danfe_linha_1+linha_break+danfe_linha_2;
+		// LIMPEZA DE LINHAS VAZIAS
+		if (rec == "NF/ND" && document.getElementById("nfnd_nome_1").value=="") {
+			nfnd_1 = "";}
+		if (rec == "NF/ND" && document.getElementById("nfnd_nome_2").value=="") {
+			nfnd_2 = "";}
+		if (rec == "NF/ND" && document.getElementById("nfnd_nome_3").value=="") {
+			nfnd_3 = "";}
+		if (rec == "NF/ND" && document.getElementById("nfnd_nome_4").value=="") {
+			nfnd_4 = "";}
+		if (rec == "NF/ND" && document.getElementById("nfnd_nome_5").value=="") {
+			nfnd_5 = "";}
 
+		if (rec == "DANFE" && document.getElementById("danfe_nome_1").value=="") {
+			danfe_1 = "";}
+		if (rec == "DANFE" && document.getElementById("danfe_nome_2").value=="") {
+			danfe_2 = "";}
+		if (rec == "DANFE" && document.getElementById("danfe_nome_3").value=="") {
+			danfe_3 = "";}
+		if (rec == "DANFE" && document.getElementById("danfe_nome_4").value=="") {
+			danfe_4 = "";}
+		if (rec == "DANFE" && document.getElementById("danfe_nome_5").value=="") {
+			danfe_5 = "";}
+
+		var nfnd_body = nfnd_head+nfnd_1+nfnd_2+nfnd_3+nfnd_4+nfnd_5;
+		var danfe_body = danfe_head+danfe_1+danfe_2+danfe_3+danfe_4+danfe_5;
+
+		// DEFINIÇÃO DO TIPO DE BODY
 		if (rec == "NF/ND") {
 			var body = "REQUISIÇÃO DE PO%0D%0A%0D%0AFORNECEDOR: "+forn+"%0D%0APEP: "+peps+"%0D%0A%0D%0A"+nfnd_body;
 		} else {
@@ -299,18 +421,7 @@
 		// ENVIO DO EMAIL
 		if (rec == "none" || forn == "none" || peps == "none") {		// CHECK INICIAL - PREENCHIMENTO FILTROS INICIAIS
 			alert("Por favor, preencha as informações necessárias de FORNECEDOR, PAGAMENTO ou RECEBIMENTO");
-		} else if (rec == "NF/ND") {
-			for (let i = 1; i <= 2; i++) {
-				var tipo = document.getElementById("nfnd_tipo_"+i).value;
-				var nome = document.getElementById("nfnd_nome_"+i).value;
-				if (tipo == "none" && nome != "none" || tipo == "none" && nome == "none" || tipo != "none" && nome == "none") {
-					// return;
-					alert("Por favor, defina se o item "+i+" é um SERVIÇO ou um PRODUTO");
-				} else {
-			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
-	    		}
-			}
-		} else if (rec == "DANFE") {
+		} else {
 			window.open("mailto:julio.ciscato@pmi.com?subject="+sub+"&body="+body);
 	    }
 	}
@@ -336,7 +447,44 @@
 		var multi = (qtd*uni);
 		document.getElementById("danfe_tt_1").value = multi.toFixed(2);
 	}
+	function danfe2(){
+		var qtd = document.getElementById("danfe_qtd_2").value;
+		var uni = document.getElementById("danfe_uni_2").value;
+		var multi = (qtd*uni);
+		document.getElementById("danfe_tt_2").value = multi.toFixed(2);
+	}
+	function danfe3(){
+		var qtd = document.getElementById("danfe_qtd_3").value;
+		var uni = document.getElementById("danfe_uni_3").value;
+		var multi = (qtd*uni);
+		document.getElementById("danfe_tt_3").value = multi.toFixed(2);
+	}
+	function danfe4(){
+		var qtd = document.getElementById("danfe_qtd_4").value;
+		var uni = document.getElementById("danfe_uni_4").value;
+		var multi = (qtd*uni);
+		document.getElementById("danfe_tt_4").value = multi.toFixed(2);
+	}
+	function danfe5(){
+		var qtd = document.getElementById("danfe_qtd_5").value;
+		var uni = document.getElementById("danfe_uni_5").value;
+		var multi = (qtd*uni);
+		document.getElementById("danfe_tt_5").value = multi.toFixed(2);
+	}
 
+	function fornecedorextra(){
+		if (document.getElementById("fornecedores").value == "OTHER") {
+			document.getElementById("vendor_extra_nome").style.display = "flex";
+			document.getElementById("vendor_extra_cod").style.display = "flex";
+			document.getElementById("vendor_extra_nome_titulo").style.display = "flex";
+			document.getElementById("vendor_extra_cod_titulo").style.display = "flex";
+		} else {
+			document.getElementById("vendor_extra_nome").style.display = "none";
+			document.getElementById("vendor_extra_cod").style.display = "none";
+			document.getElementById("vendor_extra_nome_titulo").style.display = "none";
+			document.getElementById("vendor_extra_cod_titulo").style.display = "none";			
+		}
+	}
 
 </script>
 
